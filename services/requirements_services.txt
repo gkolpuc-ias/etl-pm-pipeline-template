@@ -1,0 +1,16 @@
+############################################################
+# Dependencies required to execute tests
+############################################################
+
+setuptools>=20.10.1,<58.0.0
+etl-pm-pipeline-cicd-common==1.0.21
+boto3==1.13.26
+
+
+pylint==2.7.2
+pytest==6.2.2
+pytest-cov==2.11.1
+pytest-env==0.6.2
+pytest-xdist==2.5.0
+mockito==1.2.2
+invoke==1.5.0
