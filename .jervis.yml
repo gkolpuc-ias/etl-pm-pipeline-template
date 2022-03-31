@@ -1,0 +1,16 @@
+language: shell
+python: 3.6
+docker: enabled
+node_js: 12.18
+agent_custom_setup: |
+  if ! type -P cdk; then
+    npm install -g aws-cdk@1.108
+  fi
+  pip install --upgrade pip
+  pip install -r requirements.txt
+branches:
+  only:
+    - master
+    - /^[0-9.]+-hotfix$/
+jenkins:
+  pipeline_jenkinsfile: .ci/Jenkinsfile.groovy
