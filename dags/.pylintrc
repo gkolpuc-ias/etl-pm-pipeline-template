@@ -1,0 +1,15 @@
+[FORMAT]
+max-line-length=125
+
+[DESIGN]
+max-locals=20
+min-public-methods=1
+
+[SIMILARITIES]
+min-similarity-lines=10
+
+[ATTRIBUTES ALLOWED]
+max-attributes=12
+max-args=8
+
+disable=no-self-use,missing-docstring,empty-docstring,too-few-public-methods,import-error,relative-beyond-top-level

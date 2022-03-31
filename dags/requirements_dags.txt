@@ -1,0 +1,46 @@
+###########################################################################
+# Dependencies for airflow dags
+# Install dependencies with legacy resolver:
+# pip install -r requirements_dags.txt --use-deprecated=legacy-resolver
+###########################################################################
+
+-c airflow_constraints.txt
+
+# included in Airflow runtime environment:
+apache-airflow==1.10.10                 #skip-docker
+
+python-dateutil
+retrying
+boto3
+requests
+jsonschema
+mysqlclient
+airflow-contrib-v1-0-44==1.0.44
+jira==2.0.0
+snowflake-connector-python
+
+aws-cdk.core==1.41.0
+aws-cdk.aws_iam==1.41.0
+aws-cdk.aws_sns==1.41.0
+aws-cdk.aws_s3==1.41.0
+aws-cdk.aws_ec2==1.41.0
+aws-cdk.aws_emr==1.41.0
+aws-cdk.aws_dynamodb==1.41.0
+aws-cdk.aws_cloudwatch_actions==1.41.0
+
+# included into airflow pipelines zip file
+etl-pm-pipeline-airflow-common==0.1.1       #skip-docker
+
+# deploy-locally/validate/test dependencies
+invoke==1.5.0                           #skip-docker
+pytest==6.2.2                           #skip-docker
+pytest-env                              #skip-docker
+pytest-cov==2.11.1                      #skip-docker
+pytest-xdist==2.5.0                     #skip-docker
+pylint==2.7.2                           #skip-docker
+PyChef==0.3.0                           #skip-docker
+awscli==1.18.49                         #skip-docker
+findspark                               #skip-docker
+moto                                    #skip-docker
+mockito==1.2.2                          #skip-docker
+etl-pm-pipeline-cicd-common==1.0.16     #skip-docker
