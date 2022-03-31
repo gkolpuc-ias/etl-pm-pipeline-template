@@ -1,0 +1,27 @@
+############################################################
+# Dependencies used for building AWS stack
+############################################################
+
+ias-aws-cdk==0.5.1
+aws-cdk.core==1.108.1
+aws-cdk.aws_iam==1.108.1
+aws-cdk.aws_sns==1.108.1
+aws-cdk.aws_sns_subscriptions==1.108.1
+aws-cdk.aws_s3==1.108.1
+aws-cdk.aws_ecs==1.108.1
+aws-cdk.aws_ecs_patterns==1.108.1
+aws-cdk.aws_ec2==1.108.1
+aws-cdk.aws_ecr==1.108.1
+aws-cdk.aws_logs==1.108.1
+aws-cdk.aws_dynamodb==1.108.1
+aws-cdk.aws_glue==1.108.1
+aws-cdk.aws_secretsmanager==1.108.1
+
+boto3==1.17.8
+invoke==1.5.0
+awscli==1.19.27
+pylint==2.9.5
+PyChef==0.3.0
+jsonschema==3.2.0
+etl-pm-pipeline-cicd-common==1.0.21
+etl-pm-pipeline-cdk-common==1.0.3

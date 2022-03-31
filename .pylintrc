@@ -1,0 +1,14 @@
+[FORMAT]
+max-line-length=132
+
+[DESIGN]
+max-locals=20
+min-public-methods=1
+
+[SIMILARITIES]
+min-similarity-lines=20
+
+[ATTRIBUTES ALLOWED]
+max-attributes=12
+
+disable=no-self-use,missing-docstring,missing-module-docstring,empty-docstring,too-few-public-methods
