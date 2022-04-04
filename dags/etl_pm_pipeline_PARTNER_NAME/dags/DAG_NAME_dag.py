@@ -1,14 +1,17 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 from typing import Any, Mapping
 
 from airflow.utils.helpers import chain
+from airflow.operators.python_operator import PythonOperator
+from airflow.models.taskinstance import TaskInstance
+from airflow.models.dagrun import DagRun
 
 from ..common import PMIDAG
 from ..common.config_provider import ConfigProvider
-from ..common.operators import (
-    PmiEcsFargateOperator,
-    get_ecs_container_override,
-)
+# from ..common.operators import (
+#     PmiEcsFargateOperator,
+#     get_ecs_container_override,
+# )
 
 PIPELINE_NAME = "DAG_NAME"
 
@@ -64,25 +67,25 @@ class DAG_NAMEDag(PMIDAG):
                 op_kwargs={'lookback_hours': self.pipeline_config['lookback_hours']}
             )
 
-            task = PmiEcsFargateOperator(
-                task_id=f"SERVICE_NAME_task",
-                task_definition=config.get_DAG_NAME("SERVICE_NAMEDefinitionArn"),
-                security_group_id=config.get_DAG_NAME("SecurityGroupId"),
-                execution_timeout=TASK_TIMEOUT,
-                container_overrides=[
-                    get_ecs_container_override(
-                        "SERVICE_NAME",
-                        [
-                            "SERVICE_NAME.py",
-                            "--date", "{{ ds }}",
-                        ]
-                    ),
-                ],
-                log_group_name=config.get_DAG_NAME("LogGroupName"),
-                log_stream_prefix="ecs/SERVICE_NAME",
-            )
-
+            # task = PmiEcsFargateOperator(
+            #     task_id=f"SERVICE_NAME_task",
+            #     task_definition=config.get_DAG_NAME("SERVICE_NAMEDefinitionArn"),
+            #     security_group_id=config.get_DAG_NAME("SecurityGroupId"),
+            #     execution_timeout=TASK_TIMEOUT,
+            #     container_overrides=[
+            #         get_ecs_container_override(
+            #             "SERVICE_NAME",
+            #             [
+            #                 "SERVICE_NAME.py",
+            #                 "--date", "{{ ds }}",
+            #             ]
+            #         ),
+            #     ],
+            #     log_group_name=config.get_DAG_NAME("LogGroupName"),
+            #     log_stream_prefix="ecs/SERVICE_NAME",
+            # )
+            #
             chain(
-                set_parameters_task,
-                task
+                set_parameters_task
+                # , task
             )

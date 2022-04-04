@@ -1,0 +1,26 @@
+#############################################################################
+# Dependencies for emr scripts
+#############################################################################
+
+
+# included in EMR runtime environment:
+# uncomment pypandoc in case of problem with installing pyspark
+pypandoc
+pyspark==2.4.4
+pyspark-stubs==2.4.0.post8
+etl_pm_pipeline_common==1.0.21
+
+# deploy-locally/validate/test dependencies
+pylint==2.7.2
+pytest==6.2.2
+pytest-cov==2.11.1
+mockito==1.2.2
+PyChef==0.3.0
+invoke==1.5.0
+awscli==1.19.27
+avro==1.10.2
+moto
+etl-pm-pipeline-cicd-common==1.0.17
+
+# in case of problem like: 'setup command: use_2to3 is invalid' try with lower version of setuptools:
+setuptools==57.5.0
