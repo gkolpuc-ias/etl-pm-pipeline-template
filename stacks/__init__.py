@@ -1,2 +1,1 @@
-from .PARTNER_NAME_prerequisites_stack import YoutubePrerequisitesStack
-from .customer_links_builder import CustomerLinksBuilderStack
+from .PARTNER_NAME_prerequisites_stack import PARTNER_NAME_CAMEL_CASEPrerequisitesStack

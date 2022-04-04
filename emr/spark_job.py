@@ -19,7 +19,7 @@ class PipelineSparkJob(PMISparkJob):
         self.add_argument('--output-path', required=True)
 
     def _get_job_name(self, _):
-        return "Facebook raw data conversion"
+        return "Spark job name"
 
     def execute(self, spark: SparkSession, args: Namespace):
         execute(spark, args)

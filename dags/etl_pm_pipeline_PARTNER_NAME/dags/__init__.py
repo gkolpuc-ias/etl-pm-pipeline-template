@@ -1,2 +1,1 @@
-
-from .DAG_NAME_UNDERSCORED_dag import VideoContentFetcherDag
+from .DAG_NAME_UNDERSCORED_dag import DAG_NAME_CAMEL_CASEDag

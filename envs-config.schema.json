@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema#",
-  "$id": "http://integralads.com/schemas/etl-pm-pipeline-youtube/envs-config.json",
+  "$id": "http://integralads.com/schemas/etl-pm-pipeline-PARTNER_NAME/envs-config.json",
   "definitions": {
     "dag": {
       "type": "object",

@@ -13,7 +13,7 @@ from etl_pm_pipeline_cdk_common.base_prerequisites_stack import BasePrerequisite
 
 
 class PARTNER_NAME_CAMEL_CASEPrerequisitesStack(BasePrerequisitesStack):
-    """YouTube Prerequisites stack."""
+    """PARTNER_NAME_CAMEL_CASE Prerequisites stack."""
 
     def __init__(self, scope: core.Construct, app: PMIApp, cid: str):
         super().__init__(
@@ -73,7 +73,6 @@ class PARTNER_NAME_CAMEL_CASEPrerequisitesStack(BasePrerequisitesStack):
         # Dynamodb resources
 
         # Table to track execution processes, triggering DAGs, save states, etc.
-        # set up to replace HDFS flag files used in etl-pm-youtube-adh
         self._status_table = dynamodb.Table(
             self,
             "StatusTable",

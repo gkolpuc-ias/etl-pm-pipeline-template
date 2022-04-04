@@ -135,7 +135,7 @@ def init(ctx):
 
     for r, d, f in os.walk('dags'):
         for file in f:
-            # file_name = 'dags/etl_pm_pipeline_PARTNER_NAME/dags/DAG_NAME_dag.py'
+            # file_name = 'dags/etl_pm_pipeline_PARTNER_NAME/dags/DAG_NAME_UNDERSCORED_dag.py'
             file_name = os.path.join(r, file)
             fin = open(file_name, "rt")
             data = fin.read()

@@ -147,7 +147,7 @@ cdk.context.json
 **/.idea/**
 data/**
 data-out/**
-/etl-pm-pipeline-facebook.iml
+/etl-pm-pipeline-*.iml
 
 docker/*
 metastore_db/
