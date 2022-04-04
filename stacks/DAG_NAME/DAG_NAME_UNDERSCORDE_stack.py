@@ -7,17 +7,17 @@ from aws_cdk import (
 from ias_aws_cdk.pmi import PMIApp, get_region_designator
 
 from etl_pm_pipeline_cdk_common.ecs_base_stack import EcsStack
-from ..PARTNER_NAME_prerequisites_stack import PARTNER_NAMEPrerequisitesStack
+from ..PARTNER_NAME_prerequisites_stack import PARTNER_NAME_CAMEL_CASEPrerequisitesStack
 
 
-class STACK_NAME_Stack(EcsStack):
+class DAG_NAME_CAMEL_CASEStack(EcsStack):
     def __init__(
             self,
             scope: core.Construct,
             app: PMIApp,
             stack_id: str,
             *,
-            prereqs_stack: PARTNER_NAMEPrerequisitesStack,
+            prereqs_stack: PARTNER_NAME_CAMEL_CASEPrerequisitesStack,
     ):
         super().__init__(
             scope,

@@ -162,7 +162,7 @@ class PMIDAG(ABC, DAG):
         ABC.__init__(self)
 
         self._pipeline_name = pipeline_name
-        self._partner = 'youtube'
+        self._partner = 'PARTNER_NAME'
         self._app_name = app_name
         self._env_config = env_config
         self._pipeline_config = env_config['pipelines'][pipeline_name]
@@ -229,7 +229,7 @@ class PMIDAG(ABC, DAG):
             user_defined_filters={
                 'data_date_tz_offset': _data_date_tz_offset_filter
             },
-            tags=['youtube']
+            tags=['PARTNER_NAME']
         )
 
     def aws_resource_shared(self, resource_name: str) -> str:

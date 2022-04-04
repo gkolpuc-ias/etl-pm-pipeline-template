@@ -25,7 +25,7 @@ from etl_pm_pipeline_PARTNER_NAME.dags import (
     QueryVideoIdDag
 )
 
-APP_NAME = 'etl-pm-pipeline-youtube'
+APP_NAME = 'etl-pm-pipeline-PARTNER_NAME'
 
 # load environment configuration
 env_config = json.loads(pkg_resources.resource_string(

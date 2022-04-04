@@ -1,6 +1,8 @@
 """Project tasks.
 See https://www.pyinvoke.org/ for details.
 """
+import os
+
 from etl_pm_pipeline_cicd_common.tasks.airflow_tasks import (
     deploy_dags_to_local_airflow,
     init_local_airflow,
@@ -70,3 +72,76 @@ def airflow(ctx, init=False):
     build_image(ctx)
     deploy_locally(ctx)
     start_airflow(ctx)
+
+
+def apply_config(config: dict, additional_config: dict, string: str):
+    rename = False
+    final_name = string
+    for key in additional_config:
+        if key in string:
+            final_name = final_name.replace(key, additional_config[key])
+            rename = True
+
+    for key in config:
+        if key in string:
+            final_name = final_name.replace(key, config[key])
+            rename = True
+
+    if rename:
+        return final_name
+    else:
+        return None
+
+
+from re import sub
+
+
+def camel_case(s):
+    s = sub(r"(_|-)+", " ", s).title().replace(" ", "")
+    return ''.join([s[0].upper(), s[1:]])
+
+
+@task
+def init(ctx):
+    # use lower case and '-' as separator
+    config = {
+        'DAG_NAME': 'grzegorz-daily',
+        'PARTNER_NAME': 'grzegorz',
+        'SERVICE_NAME': 'daily-processor',
+    }
+
+    additional_config = {}
+    for key in config:
+        additional_config[f'{key}_CAMEL_CASE'] = camel_case(config[key])
+        additional_config[f'{key}_UNDERSCORED'] = config[key].replace('-', '_')
+
+    # config.update(additional_config)
+
+    print(config)
+
+    for r, d, f in os.walk('dags'):
+        for file in f:
+
+            new_name = apply_config(config, additional_config, f'{file}')
+            if new_name:
+                print(f'{os.path.join(r, file)} -> {os.path.join(r, new_name)}')
+
+    for r, d, f in os.walk('dags'):
+        for folder in d:
+            new_name = apply_config(config, additional_config, f'{folder}')
+            if new_name:
+                print(f'{os.path.join(r, folder)} -> {os.path.join(r, new_name)}')
+                # print(folder)
+
+    for r, d, f in os.walk('dags'):
+        for file in f:
+            # file_name = 'dags/etl_pm_pipeline_PARTNER_NAME/dags/DAG_NAME_dag.py'
+            file_name = os.path.join(r, file)
+            fin = open(file_name, "rt")
+            data = fin.read()
+            new_data = apply_config(config, additional_config, data)
+            fin.close()
+            if new_data:
+                fin = open(file_name, "wt")
+                fin.write(new_data)
+                fin.close()

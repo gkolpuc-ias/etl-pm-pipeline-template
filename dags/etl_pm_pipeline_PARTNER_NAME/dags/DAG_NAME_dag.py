@@ -8,6 +8,7 @@ from airflow.models.dagrun import DagRun
 
 from ..common import PMIDAG
 from ..common.config_provider import ConfigProvider
+
 # from ..common.operators import (
 #     PmiEcsFargateOperator,
 #     get_ecs_container_override,
@@ -18,7 +19,7 @@ PIPELINE_NAME = "DAG_NAME"
 TASK_TIMEOUT = timedelta(hours=1)
 
 
-class DAG_NAMEDag(PMIDAG):
+class DAG_NAME_CAMEL_CASEDag(PMIDAG):
 
     def set_parameters(
             self,
@@ -68,21 +69,21 @@ class DAG_NAMEDag(PMIDAG):
             )
 
             # task = PmiEcsFargateOperator(
-            #     task_id=f"SERVICE_NAME_task",
-            #     task_definition=config.get_DAG_NAME("SERVICE_NAMEDefinitionArn"),
-            #     security_group_id=config.get_DAG_NAME("SecurityGroupId"),
+            #     task_id=f"SERVICE_NAME_UNDERSCORED_task",
+            #     task_definition=config.get_DAG_NAME_UNDERSCORED("SERVICE_NAME_UNDERSCOREDDefinitionArn"),
+            #     security_group_id=config.get_DAG_NAME_UNDERSCORED("SecurityGroupId"),
             #     execution_timeout=TASK_TIMEOUT,
             #     container_overrides=[
             #         get_ecs_container_override(
-            #             "SERVICE_NAME",
+            #             "SERVICE_NAME_UNDERSCORED",
             #             [
-            #                 "SERVICE_NAME.py",
+            #                 "SERVICE_NAME_UNDERSCORED.py",
             #                 "--date", "{{ ds }}",
             #             ]
             #         ),
             #     ],
-            #     log_group_name=config.get_DAG_NAME("LogGroupName"),
-            #     log_stream_prefix="ecs/SERVICE_NAME",
+            #     log_group_name=config.get_DAG_NAME_UNDERSCORED("LogGroupName"),
+            #     log_stream_prefix="ecs/SERVICE_NAME_UNDERSCORED",
             # )
             #
             chain(

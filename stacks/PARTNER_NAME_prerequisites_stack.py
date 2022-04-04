@@ -12,7 +12,7 @@ from etl_pm_pipeline_cdk_common.constants import SHARED_RESOURCES_STACK_NAME_BAS
 from etl_pm_pipeline_cdk_common.base_prerequisites_stack import BasePrerequisitesStack
 
 
-class PARTNER_NAMEPrerequisitesStack(BasePrerequisitesStack):
+class PARTNER_NAME_CAMEL_CASEPrerequisitesStack(BasePrerequisitesStack):
     """YouTube Prerequisites stack."""
 
     def __init__(self, scope: core.Construct, app: PMIApp, cid: str):

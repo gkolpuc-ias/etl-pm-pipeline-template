@@ -53,12 +53,9 @@ def updated_config(env):
                 "etl-pm-pipeline-PARTNER_NAME-test-prereqs": {
                     "VPCPrivateSubnetIds": "subnet-a,subnet-b",
                     "ECSClusterName": "ecs.test.cluster",
-                    "YoutubeNotificationsTopicName": "yt-notifications-topic",
-                    "YoutubeNotificationsTopicArn": "yt-notifications-topic",
                 },
                 "etl-pm-pipeline-PARTNER_NAME-test-SERVICE_NAME": {
                     "LogGroupName": "log-group",
-                    "SadIPLoaderDefinitionArn": "sad-ip-loader",
                     "SecurityGroupId": "security-group",
                 }
             },
