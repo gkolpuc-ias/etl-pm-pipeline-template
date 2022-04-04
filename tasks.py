@@ -93,14 +93,6 @@ def apply_config(config: dict, additional_config: dict, string: str):
         return None
 
 
-from re import sub
-
-
-def camel_case(s):
-    s = sub(r"(_|-)+", " ", s).title().replace(" ", "")
-    return ''.join([s[0].upper(), s[1:]])
-
-
 @task
 def init(ctx):
     # use lower case and '-' as separator
@@ -110,32 +102,37 @@ def init(ctx):
         'SERVICE_NAME': 'daily-processor',
     }
 
+    from re import sub
+
+    def camel_case(s):
+        s = sub(r"(_|-)+", " ", s).title().replace(" ", "")
+        return ''.join([s[0].upper(), s[1:]])
+
     additional_config = {}
     for key in config:
         additional_config[f'{key}_CAMEL_CASE'] = camel_case(config[key])
         additional_config[f'{key}_UNDERSCORED'] = config[key].replace('-', '_')
 
-    # config.update(additional_config)
-
     print(config)
 
     for r, d, f in os.walk('dags'):
         for file in f:
-
             new_name = apply_config(config, additional_config, f'{file}')
             if new_name:
-                print(f'{os.path.join(r, file)} -> {os.path.join(r, new_name)}')
+                src = os.path.join(r, file)
+                dst = os.path.join(r, new_name)
+                os.rename(src, dst)
 
     for r, d, f in os.walk('dags'):
         for folder in d:
             new_name = apply_config(config, additional_config, f'{folder}')
             if new_name:
-                print(f'{os.path.join(r, folder)} -> {os.path.join(r, new_name)}')
-                # print(folder)
+                src = os.path.join(r, folder)
+                dst = os.path.join(r, new_name)
+                os.rename(src, dst)
 
     for r, d, f in os.walk('dags'):
         for file in f:
-            # file_name = 'dags/etl_pm_pipeline_PARTNER_NAME/dags/DAG_NAME_UNDERSCORED_dag.py'
             file_name = os.path.join(r, file)
             fin = open(file_name, "rt")
             data = fin.read()
