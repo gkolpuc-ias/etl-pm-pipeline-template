@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://integralads.com/schemas/etl-pm-pipeline-youtube/envs-config.json",
+  "definitions": {
+    "dag": {
+      "type": "object",
+      "properties": {
+        "schedule": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "start_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "catchup": {
+          "type": "boolean"
+        },
+        "max_active_runs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "use_cloudformation_stack": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schedule",
+        "start_date",
+        "catchup",
+        "use_cloudformation_stack"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "patternProperties": {
+    "^(dev|staging|prod)$": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "type": "string",
+          "enum": [
+            "us-east-1",
+            "us-west-2"
+          ]
+        },
+        "airflow_cluster_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)*$"
+        },
+        "airflow_aws_conn_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(_[a-z][a-z0-9]*)*$"
+        },
+        "data_load_trigger_sns_topic_arn": {
+          "type": "string",
+          "pattern": "^arn:aws:sns:[a-z][a-z0-9-]*:[0-9]{12}:"
+        },
+        "emr_cluster_account": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "emr_cluster_ssh_keypair": {
+          "type": "string"
+        },
+        "pipelines": {
+          "type": "object",
+          "properties": {
+            "SERVICE_NAME": {
+              "type": "object",
+              "properties": {
+                "dag": {
+                  "$ref": "#/definitions/dag"
+                }
+              },
+              "required": [
+                "dag"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "SERVICE_NAME"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "region",
+        "airflow_cluster_id",
+        "airflow_aws_conn_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "dev",
+    "staging",
+    "prod"
+  ],
+  "additionalProperties": false
+}
