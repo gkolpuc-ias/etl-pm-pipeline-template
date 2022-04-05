@@ -12,7 +12,7 @@ from airflow.models import DagBag
 
 from ..etl_pm_pipeline_PARTNER_NAME.common import PMIDAG
 
-EXPECTED_NUMBER_OF_DAGS = 15
+EXPECTED_NUMBER_OF_DAGS = 1
 
 
 @pytest.fixture(autouse=True)

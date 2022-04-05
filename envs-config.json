@@ -7,7 +7,7 @@
     "emr_cluster_account": "ias-dev",
     "emr_cluster_ssh_keypair": "ww-shared-dev",
     "pipelines": {
-      "SERVICE_NAME": {
+      "DAG_NAME": {
         "dag": {
           "schedule": "45 23 * * *",
           "start_date": "2021-08-18",
@@ -25,7 +25,7 @@
     "data_load_trigger_sns_topic_arn": "arn:aws:sns:us-east-1:762744286896:etl-pm-s3-dw-ingestion-trigger",
     "emr_cluster_account": "ias-staging",
     "pipelines": {
-      "SERVICE_NAME": {
+      "DAG_NAME": {
         "dag": {
           "schedule": "45 23 * * *",
           "start_date": "2020-11-15",
@@ -43,7 +43,7 @@
     "data_load_trigger_sns_topic_arn": "arn:aws:sns:us-east-1:454457967641:etl-pm-s3-dw-ingestion-trigger",
     "emr_cluster_account": "ias-prod",
     "pipelines": {
-      "SERVICE_NAME": {
+      "DAG_NAME": {
         "dag": {
           "schedule": "45 23 * * *",
           "start_date": "2020-11-15",

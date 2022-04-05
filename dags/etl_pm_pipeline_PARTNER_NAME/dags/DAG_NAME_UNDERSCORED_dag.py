@@ -65,7 +65,7 @@ class DAG_NAME_CAMEL_CASEDag(PMIDAG):
                 task_id='set_parameters',
                 provide_context=True,
                 python_callable=self.set_parameters,
-                op_kwargs={'lookback_hours': self.pipeline_config['lookback_hours']}
+                op_kwargs={'lookback_hours': 24}
             )
 
             # task = PmiEcsFargateOperator(
