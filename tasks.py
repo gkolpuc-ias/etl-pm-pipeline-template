@@ -122,7 +122,7 @@ def init(ctx):
     print(config)
     print(additional_config)
 
-    dir_to_template = 'services'
+    dir_to_template = '.'
     for r, d, f in os.walk(dir_to_template):
         for file in f:
             src = os.path.join(r, file)
