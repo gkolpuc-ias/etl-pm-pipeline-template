@@ -12,3 +12,5 @@ config = {
 
 2. execute `invoke init` to finish setup
 3. Remove `init` function from `tasks.py`
+
+To complete your repo setup follow https://github.com/integralads/re-documentation/blob/master/jenkins-ng/getting-started.md page get CI_CD in place.

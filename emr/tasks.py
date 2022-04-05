@@ -11,9 +11,7 @@ from etl_pm_pipeline_cicd_common.tasks.validate_tasks import lint_python_code
 
 @task
 def validate_emr(ctx):
-    # temporal '--exit-zero' as code has tens of lint errors
-    # to be fixed as separate story
-    lint_python_code(ctx, ['--exit-zero ../emr'])
+    lint_python_code(ctx, ['../emr'])
 
 
 @task
