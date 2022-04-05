@@ -74,25 +74,6 @@ def airflow(ctx, init=False):
     start_airflow(ctx)
 
 
-def apply_config(config: dict, additional_config: dict, string: str):
-    rename = False
-    final_name = string
-    for key in additional_config:
-        if key in string:
-            final_name = final_name.replace(key, additional_config[key])
-            rename = True
-
-    for key in config:
-        if key in string:
-            final_name = final_name.replace(key, config[key])
-            rename = True
-
-    if rename:
-        return final_name
-    else:
-        return None
-
-
 @task
 def init(ctx):
     # use lower case and '-' as separator
@@ -102,11 +83,36 @@ def init(ctx):
         'SERVICE_NAME': 'daily-processor',
     }
 
+    def ignore_path(path):
+        ignore_dirs = ['venv', '.git', '.idea', 'README.md', 'pycache']
+        for ignore in ignore_dirs:
+            if ignore in path:
+                return True
+        return False
+
     from re import sub
 
     def camel_case(s):
         s = sub(r"(_|-)+", " ", s).title().replace(" ", "")
         return ''.join([s[0].upper(), s[1:]])
+
+    def apply_config(config: dict, additional_config: dict, string: str):
+        rename = False
+        final_name = string
+        for key in additional_config:
+            if key in string:
+                final_name = final_name.replace(key, additional_config[key])
+                rename = True
+
+        for key in config:
+            if key in string:
+                final_name = final_name.replace(key, config[key])
+                rename = True
+
+        if rename:
+            return final_name
+        else:
+            return None
 
     additional_config = {}
     for key in config:
@@ -114,31 +120,44 @@ def init(ctx):
         additional_config[f'{key}_UNDERSCORED'] = config[key].replace('-', '_')
 
     print(config)
+    print(additional_config)
 
-    for r, d, f in os.walk('dags'):
+    dir_to_template = 'services'
+    for r, d, f in os.walk(dir_to_template):
         for file in f:
-            new_name = apply_config(config, additional_config, f'{file}')
-            if new_name:
-                src = os.path.join(r, file)
-                dst = os.path.join(r, new_name)
-                os.rename(src, dst)
+            src = os.path.join(r, file)
+            if not ignore_path(f'{src}'):
+                print(f'Changing {src} ...')
+                new_name = apply_config(config, additional_config, f'{file}')
+                if new_name:
+                    dst = os.path.join(r, new_name)
+                    os.rename(src, dst)
 
-    for r, d, f in os.walk('dags'):
+    for r, d, f in os.walk(dir_to_template, topdown=False):
+        # print(f'{r}, {d}, {f}')
         for folder in d:
-            new_name = apply_config(config, additional_config, f'{folder}')
-            if new_name:
-                src = os.path.join(r, folder)
-                dst = os.path.join(r, new_name)
-                os.rename(src, dst)
+            src = os.path.join(r, folder)
+            print(f'Checking dir {src} ...')
+            if not ignore_path(f'{src}'):
+                print(f'Renaming dir {src} ...')
+                new_name = apply_config(config, additional_config, f'{folder}')
+                if new_name:
+                    dst = os.path.join(r, new_name)
+                    if os.path.exists(dst) and os.path.isdir(dst):
+                        import shutil
+                        shutil.rmtree(dst)
+                    os.rename(src, dst)
 
-    for r, d, f in os.walk('dags'):
+    for r, d, f in os.walk(dir_to_template):
         for file in f:
             file_name = os.path.join(r, file)
-            fin = open(file_name, "rt")
-            data = fin.read()
-            new_data = apply_config(config, additional_config, data)
-            fin.close()
-            if new_data:
-                fin = open(file_name, "wt")
-                fin.write(new_data)
+            if not ignore_path(f'{file_name}'):
+                print(f'Changing {file_name} ...')
+                fin = open(file_name, "rt")
+                data = fin.read()
+                new_data = apply_config(config, additional_config, data)
                 fin.close()
+                if new_data:
+                    fin = open(file_name, "wt")
+                    fin.write(new_data)
+                    fin.close()

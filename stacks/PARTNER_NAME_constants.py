@@ -7,3 +7,4 @@ class PARTNER_NAME_CAMEL_CASEConstants:
     """
     SHARED = 'shared'
     PREREQS = 'prereqs'
+    DAG_NAME_UNDERSCORED = 'DAG_NAME'
