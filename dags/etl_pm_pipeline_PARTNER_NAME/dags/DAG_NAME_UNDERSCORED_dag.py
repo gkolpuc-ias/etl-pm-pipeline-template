@@ -70,7 +70,7 @@ class DAG_NAME_CAMEL_CASEDag(PMIDAG):
 
             # task = PmiEcsFargateOperator(
             #     task_id=f"SERVICE_NAME_UNDERSCORED_task",
-            #     task_definition=config.get_DAG_NAME_UNDERSCORED("SERVICE_NAME_UNDERSCOREDDefinitionArn"),
+            #     task_definition=config.get_DAG_NAME_UNDERSCORED("SERVICE_NAME_CAMEL_CASEDefinitionArn"),
             #     security_group_id=config.get_DAG_NAME_UNDERSCORED("SecurityGroupId"),
             #     execution_timeout=TASK_TIMEOUT,
             #     container_overrides=[

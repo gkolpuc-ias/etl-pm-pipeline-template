@@ -43,4 +43,4 @@ awscli==1.18.49                         #skip-docker
 findspark                               #skip-docker
 moto                                    #skip-docker
 mockito==1.2.2                          #skip-docker
-etl-pm-pipeline-cicd-common==1.0.16     #skip-docker
+etl-pm-pipeline-cicd-common==1.0.25     #skip-docker

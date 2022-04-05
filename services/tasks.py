@@ -10,6 +10,6 @@ from invoke import task
 
 
 @task
-def validate_and_test_services(ctx):
-    validate_services(ctx)
+def validate_and_test_services(ctx, upgrade=False):
+    validate_services(ctx, upgrade=upgrade)
     test_services(ctx)

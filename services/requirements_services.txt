@@ -3,7 +3,7 @@
 ############################################################
 
 setuptools>=20.10.1,<58.0.0
-etl-pm-pipeline-cicd-common==1.0.21
+etl-pm-pipeline-cicd-common==1.0.25
 boto3==1.13.26
 
 

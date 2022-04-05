@@ -75,12 +75,11 @@ def airflow(ctx, init=False):
 
 
 @task
-def init(ctx):
-    # use lower case and '-' as separator
+def init(ctx, partner, dag, service):
     config = {
-        'DAG_NAME': 'grzegorz-daily',
-        'PARTNER_NAME': 'grzegorz',
-        'SERVICE_NAME': 'daily-processor',
+        'DAG_NAME': dag,
+        'PARTNER_NAME': partner,
+        'SERVICE_NAME': service,
     }
 
     def ignore_path(path):
@@ -137,7 +136,6 @@ def init(ctx):
         # print(f'{r}, {d}, {f}')
         for folder in d:
             src = os.path.join(r, folder)
-            print(f'Checking dir {src} ...')
             if not ignore_path(f'{src}'):
                 print(f'Renaming dir {src} ...')
                 new_name = apply_config(config, additional_config, f'{folder}')

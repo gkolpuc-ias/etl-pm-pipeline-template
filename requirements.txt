@@ -23,5 +23,5 @@ awscli==1.19.27
 pylint==2.9.5
 PyChef==0.3.0
 jsonschema==3.2.0
-etl-pm-pipeline-cicd-common==1.0.21
-etl-pm-pipeline-cdk-common==1.0.3
+etl-pm-pipeline-cicd-common==1.0.25
+etl-pm-pipeline-cdk-common==1.0.4
