@@ -5,8 +5,8 @@ from airflow.utils.helpers import chain
 from airflow.operators.python_operator import PythonOperator
 from airflow.models.taskinstance import TaskInstance
 from airflow.models.dagrun import DagRun
+from etl_pm_pipeline_airflow_common.pmi_dag import PMIDAG
 
-from ..common import PMIDAG
 from ..common.config_provider import ConfigProvider
 
 # from ..common.operators import (

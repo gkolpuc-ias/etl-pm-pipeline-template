@@ -29,7 +29,7 @@ aws-cdk.aws_dynamodb==1.41.0
 aws-cdk.aws_cloudwatch_actions==1.41.0
 
 # included into airflow pipelines zip file
-etl-pm-pipeline-airflow-common==0.1.1       #skip-docker
+etl-pm-pipeline-airflow-common==0.1.27      #skip-docker
 
 # deploy-locally/validate/test dependencies
 invoke==1.5.0                           #skip-docker
@@ -44,3 +44,5 @@ findspark                               #skip-docker
 moto                                    #skip-docker
 mockito==1.2.2                          #skip-docker
 etl-pm-pipeline-cicd-common==1.0.25     #skip-docker
+
+
